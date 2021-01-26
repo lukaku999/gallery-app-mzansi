@@ -1,0 +1,99 @@
+
+
+    const inputRef = useRef(null)
+<div className = "flex justify-center my-5">
+                   <input type = "text"
+                          ref = {inputRef}
+                          className="p-2 border border-gray-800 shadow rounded w-10/12"
+                          onChange = {handleChange}
+                          value = {urlText}/>
+
+                   <button disabled = {isButtonActive} 
+                           onClick = {handleAdd} 
+                           
+                           className = {`p-2 ${isButtonActive ? "bg-green-300": "bg-green-600"} text-white`}>Add New</button>
+                   
+               </div>
+
+
+ useEffect(() => {
+        if (urlText === ""){
+            setIsButtonActive(true)
+        }
+        else{
+            setIsButtonActive(false)
+        }
+    }, [urlText])
+
+    useEffect(() => {
+        inputRef.current.focus()
+       
+        
+        /*const inputBox = document.getElementById('inputBox')
+        inputBox.focus()*/
+        
+    }, [])
+
+
+    const handleAdd = () => {
+          
+        if (!isButtonActive){
+              
+            setImages([...images, urlText])
+            setUrlText("")
+        }
+        
+    
+    }
+
+
+     const scrollPosition = useScroll()
+
+    useEffect(() => {
+        if (scrollPosition >= document.body.offsetHeight - window.innerHeight){
+            setPage(1 + page)
+        }
+        
+    }, [scrollPosition])
+
+
+
+    /*class App extends React.Component{
+    constructor(props){
+        super(props)
+        console.log('Constructor')
+        this.state = {title: "hello",
+                      props,
+                      isOpen: true}
+
+        //this.handleClick = this.handleClick.bind(this)
+    }*/
+    /*handleClick(){
+        this.setState({isOpen : !this.state.isOpen})
+    }*/
+    
+    
+    /*handleClick = () => {this.setState({
+        isOpen : !this.state.isOpen
+    })}
+    render(){
+        console.log("renders")
+     
+
+      return    <section className ="flex justify-center text-center">
+                    <div className="w-1/2">
+                        <div className="my-4">
+                            {this.state.title} {this.state.props.name}
+                        </div>
+                        <div>
+                            <button onClick = {this.handleClick} className = "p-1 bg-blue-700 text-white my-2">Toogle Image</button>
+                        </div>
+                        {this.state.isOpen ? <Image/> : null}
+                        
+                    </div>
+                </section>
+    }
+  }
+
+*/
+
